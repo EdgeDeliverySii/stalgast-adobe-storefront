@@ -42,6 +42,11 @@ export default function decorate(block) {
       li.classList.add('has-children');
       childUl.classList.add('nb-submenu');
 
+      if (li === root.children[1]) {
+        li.classList.add('nb-item-tiles');
+        childUl.classList.add('nb-submenu-tiles');
+      }
+
       if (control) {
         control.setAttribute('role', 'button');
         control.setAttribute('aria-haspopup', 'true');
