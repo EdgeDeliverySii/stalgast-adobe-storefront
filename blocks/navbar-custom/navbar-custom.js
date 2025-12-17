@@ -2,23 +2,30 @@ export default function decorate(block) {
   const root = block.querySelector('ul');
   if (!root) return;
 
-  const setExpanded = (el, state) => el?.setAttribute('aria-expanded', state);
+  const firstItem = root.querySelector(':scope > li');
+  const isMainPage = window.location.pathname === '/' ? true : false;
 
-  const openItem = (item) => {
-    item.classList.add('open');
-    setExpanded(item.querySelector('.nb-link, .nb-label'), true);
+  // helper functions
+  const setExpanded = (el, state) =>
+    el?.setAttribute('aria-expanded', String(state));
+
+  const openItem = (li) => {
+    li.classList.add('open');
+    setExpanded(li.querySelector('.nb-link, .nb-label'), true);
   };
 
-  const closeItem = (item) => {
-    item.classList.remove('open');
-    setExpanded(item.querySelector('.nb-link, .nb-label'), false);
+  const closeItem = (li) => {
+    li.classList.remove('open');
+    setExpanded(li.querySelector('.nb-link, .nb-label'), false);
   };
 
+  // main function for processing dropdowns
   function process(list, level = 1) {
     [...list.children].forEach((li) => {
       li.classList.add('nb-item', `nb-level-${level}`);
 
       let control = li.querySelector(':scope > a');
+
       if (control) {
         control.classList.add('nb-link');
       } else if (li.firstChild?.nodeType === Node.TEXT_NODE) {
@@ -47,17 +54,24 @@ export default function decorate(block) {
         clearTimeout(closeTimer);
         openItem(li);
       });
-
       li.addEventListener('mouseleave', () => {
         closeTimer = setTimeout(() => {
-          closeItem(li);
+          if (isMainPage) {
+            if (li !== firstItem) closeItem(li);
+          } else {
+            closeItem(li);
+          }
         }, 150);
       });
 
       li.addEventListener('focusin', () => openItem(li));
-
       li.addEventListener('focusout', (e) => {
-        if (!li.contains(e.relatedTarget)) closeItem(li);
+        if(isMainPage){
+          if(!li.contains(e.relatedTarget) && li !== firstItem) closeItem(li);
+        }
+        else {
+          if (!li.contains(e.relatedTarget)) closeItem(li);
+        }
       });
 
       if (control) {
@@ -73,7 +87,12 @@ export default function decorate(block) {
             e.preventDefault();
           }
           if (e.key === 'Escape') {
-            closeItem(li);
+            if(isMainPage){
+              if(li !== firstItem) closeItem(li);
+            }
+            else {
+              closeItem(li);
+            }
             control.focus();
           }
         });
@@ -85,32 +104,10 @@ export default function decorate(block) {
 
   block.classList.add('navbar');
   root.classList.add('nb-root');
+
   process(root);
 
-  const items = [...root.querySelectorAll('.nb-level-1.nb-item')];
-  const firstItem = items[0];
-
-  if (firstItem && location.pathname === "/") openItem(firstItem);
-
-  items.forEach((item) => {
-    item.addEventListener("mouseenter", () => {
-      if (location.pathname === "/") {
-        if (item !== firstItem) openItem(item);
-      } else {
-        items.forEach((i) => { if (i !== item) closeItem(i); });
-        openItem(item);
-      }
-    });
-
-    item.addEventListener("mouseleave", () => {
-      setTimeout(() => {
-        if (location.pathname === "/") {
-          const isAnyOtherOpen = items.some(i => i !== firstItem && i.classList.contains('open'));
-          if (!isAnyOtherOpen) openItem(firstItem);
-        } else {
-          closeItem(item);
-        }
-      }, 150);
-    });
-  });
+  if (isMainPage && firstItem?.classList.contains('has-children')) {
+    openItem(firstItem);
+  }
 }
