@@ -1,9 +1,13 @@
+.navbar-wrapper {
+  margin-top: 0;
+}
+
 .navbar {
   background: var(--color-accent);
-  border-bottom: 1px solid var(--color-neutral-300);
   font-family: var(--type-base-font-family);
-  align-items: center;
   padding: 0;
+  max-width: 1200px;
+  margin: 0 auto;
 }
 
 .navbar .nb-root {

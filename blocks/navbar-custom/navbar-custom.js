@@ -107,8 +107,19 @@ export default function decorate(block) {
     });
   }
 
-  block.classList.add('navbar');
   root.classList.add('nb-root');
+
+  const navBarContainer = document.createElement('div');
+  navBarContainer.classList.add('navbar');
+  navBarContainer.append(root);
+  
+  block.append(navBarContainer);
+
+  const parentDiv = navBarContainer.closest(".navbar-custom");
+  console.log(parentDiv);
+  if(parentDiv){
+    parentDiv.classList.add("navbar-wrapper");
+  }
 
   process(root);
 

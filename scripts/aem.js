@@ -10,6 +10,8 @@
  * governing permissions and limitations under the License.
  */
 
+import { loadFragment } from "../blocks/fragment/fragment.js";
+
 /* eslint-env browser */
 function sampleRUM(checkpoint, data) {
   // eslint-disable-next-line max-len
@@ -613,7 +615,23 @@ async function loadHeader(header) {
   const headerBlock = buildBlock('header', '');
   header.append(headerBlock);
   decorateBlock(headerBlock);
-  return loadBlock(headerBlock);
+
+  return await loadBlock(headerBlock);
+}
+
+/**
+ * Loads a block named 'navbar-custom' into main
+ * @param {Element} main main element
+ * @returns {Promise}
+ */
+async function loadNavbar(main){
+  const navBarCustomFragment = await loadFragment('/navbar-custom');
+  const navBarCustomBlock = buildBlock('navbar-custom', navBarCustomFragment);
+
+  main.prepend(navBarCustomBlock);
+  decorateBlock(navBarCustomBlock);
+
+  return await loadBlock(navBarCustomBlock);
 }
 
 /**
@@ -696,6 +714,7 @@ export {
   loadBlock,
   loadCSS,
   loadFooter,
+  loadNavbar,
   loadHeader,
   loadScript,
   loadSection,
