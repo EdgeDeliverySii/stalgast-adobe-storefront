@@ -1,0 +1,10 @@
+.cta-banner-custom {
+    display: flex;
+    background-color: var(--color-accent);
+    margin-left: auto;
+    width: fit-content;
+}
+
+.cta-banner-custom p {
+  margin: 0;
+}
