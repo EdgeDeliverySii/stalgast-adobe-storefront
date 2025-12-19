@@ -1,12 +1,14 @@
 .navbar-wrapper {
-  margin-top: 0;
+  margin: 0 0 var(--spacing-xbig) 0;
+  width: 100%;
+  box-sizing: border-box;
 }
 
 .navbar {
   background: var(--color-accent);
   font-family: var(--type-base-font-family);
   padding: 0;
-  max-width: 1200px;
+  width: 100%;
   margin: 0 auto;
 }
 
@@ -188,4 +190,15 @@
 
 .navbar .nb-submenu-tiles .nb-item .nb-link:hover {
   color: var(--color-accent);
+}
+
+@media (min-width: 900px) {
+  .navbar {
+    max-width: 1200px;
+    box-sizing: border-box;
+  }
+
+  .navbar-wrapper {
+    padding: 0 32px;
+  }
 }

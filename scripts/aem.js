@@ -613,6 +613,7 @@ function decorateBlocks(main) {
  */
 async function loadHeader(header) {
   const headerBlock = buildBlock('header', '');
+
   header.append(headerBlock);
   decorateBlock(headerBlock);
 
@@ -625,8 +626,7 @@ async function loadHeader(header) {
  * @returns {Promise}
  */
 async function loadNavbar(main){
-  const navBarCustomFragment = await loadFragment('/navbar-custom');
-  const navBarCustomBlock = buildBlock('navbar-custom', navBarCustomFragment);
+  const navBarCustomBlock = buildBlock('navbar-custom', '');
 
   main.prepend(navBarCustomBlock);
   decorateBlock(navBarCustomBlock);
@@ -641,8 +641,10 @@ async function loadNavbar(main){
  */
 async function loadFooter(footer) {
   const footerBlock = buildBlock('footer', '');
+
   footer.append(footerBlock);
   decorateBlock(footerBlock);
+
   return loadBlock(footerBlock);
 }
 

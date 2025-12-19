@@ -1,5 +1,20 @@
-export default function decorate(block) {
-  const root = block.querySelector('ul');
+import { getMetadata } from "../../scripts/aem.js";
+import { loadFragment } from "../fragment/fragment.js";
+
+export default async function decorate(block) {
+  // check location
+  const navbarExcludedPaths = ['/customer', '/checkout'];
+  if(navbarExcludedPaths.some((url) => window.location.pathname.includes(url))) return;
+
+  // load navbar as fragment
+  const navbarMeta = getMetadata('navbar-custom');
+  const navbarPath = navbarMeta ? new URL(navbarMeta, window.location).pathname : '/navbar-custom';
+  const fragment = await loadFragment(navbarPath);
+
+  // clear block inner text
+  block.textContent = '';
+
+  const root = fragment.querySelector('ul');
   if (!root) return;
 
   const firstItem = root.querySelector(':scope > li');
@@ -19,7 +34,7 @@ export default function decorate(block) {
     setExpanded(li.querySelector('.nb-link, .nb-label'), false);
   };
 
-  // main function for processing dropdowns
+  // main function for creating and processing dropdowns
   function process(list, level = 1) {
     [...list.children].forEach((li) => {
       li.classList.add('nb-item', `nb-level-${level}`);
@@ -80,12 +95,6 @@ export default function decorate(block) {
       });
 
       if (control) {
-        control.addEventListener('click', (e) => {
-          e.preventDefault();
-          li.classList.toggle('open');
-          setExpanded(control, li.classList.contains('open'));
-        });
-
         control.addEventListener('keydown', (e) => {
           if (e.key === 'ArrowDown') {
             childUl.querySelector('a, span')?.focus();
@@ -107,16 +116,16 @@ export default function decorate(block) {
     });
   }
 
+  // decorate navbar-custom DOM 
   root.classList.add('nb-root');
 
   const navBarContainer = document.createElement('div');
   navBarContainer.classList.add('navbar');
   navBarContainer.append(root);
-  
+
   block.append(navBarContainer);
 
   const parentDiv = navBarContainer.closest(".navbar-custom");
-  console.log(parentDiv);
   if(parentDiv){
     parentDiv.classList.add("navbar-wrapper");
   }
