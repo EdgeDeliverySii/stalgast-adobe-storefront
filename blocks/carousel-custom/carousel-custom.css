@@ -1,0 +1,102 @@
+.carousel-custom .carousel-custom-slides-container {
+  position: relative;
+}
+
+.carousel-custom .carousel-custom-slides,
+.carousel-custom .carousel-custom-slide-indicators {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.carousel-custom .carousel-custom-slides {
+  display: flex;
+  scroll-behavior: smooth;
+  scroll-snap-type: x mandatory;
+  overflow-x: scroll;
+}
+
+.carousel-custom .carousel-custom-slides::-webkit-scrollbar {
+  display: none;
+}
+
+.carousel-custom .carousel-custom-slide {
+  flex: 0 0 100%; 
+  scroll-snap-align: start;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end; 
+  justify-content: center;
+  position: relative;
+  width: 100%;
+  min-height: min(50vw, calc(100dvh - var(--header-height)));
+}
+
+.carousel-custom .carousel-custom-slide .carousel-custom-slide-image picture {
+  position: absolute;
+  inset: 0;
+}
+
+.carousel-custom .carousel-custom-slide .carousel-custom-slide-image picture > img {
+  height: 100%;
+  width: 100%;
+  object-fit: contain;
+  object-position: right; 
+}
+
+.carousel-custom .carousel-custom-slide .carousel-custom-slide-content {
+  z-index: 1;
+  margin: 68px;
+  padding: 16px;
+  color: white;
+  width: var(--slide-content-width, auto);
+  border-radius: 1rem;
+  height: 150px;
+}
+
+.carousel-custom .carousel-custom-slide .carousel-custom-slide-content > p > a {
+  position: absolute;
+  bottom: 10px;
+  right: 25px;
+  background-color: var(--color-accent);
+}
+
+.carousel-custom .carousel-custom-slide-indicators {
+  position: absolute;
+  bottom: 16px; 
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 6px 12px;
+  line-height: 0;
+  z-index: 2;
+  background: none;
+  padding: 0;
+}
+
+.carousel-custom .carousel-custom-slide-indicator button {
+  width: 18px;
+  height: 18px;
+  margin: 0;
+  padding: 0;
+  border-radius: 50%;
+  background-color: var(--color-neutral-600);
+  transition: background-color 0.3s;
+}
+
+.carousel-custom .carousel-custom-slide-indicator button:disabled,
+.carousel-custom .carousel-custom-slide-indicator button:hover,
+.carousel-custom .carousel-custom-slide-indicator button:focus-visible {
+  background-color: var(--color-neutral-100);
+}
+
+@media (min-width: 600px) {
+  .carousel-custom .carousel-custom-slide .carousel-custom-slide-content {
+    --slide-content-width: calc((100% - 184px) / 2);
+    margin: 92px;
+  }
+
+  .carousel-custom .carousel-custom-slide .carousel-custom-slide-content[data-align='justify'] {
+    --slide-content-width: auto;
+  }
+}
