@@ -148,10 +148,12 @@ export default async function decorate(block) {
           const { product, defaultImageProps } = ctx;
           const anchorWrapper = document.createElement('a');
           anchorWrapper.href = getProductLink(product.urlKey, product.sku);
+          const isSrc = defaultImageProps.src ?? null;
+          const imageProps = isSrc ? defaultImageProps : {...defaultImageProps, src: "https://artdev-7hjxg3i-awxnxowa5lur4.eu-4.magentosite.cloud/media/catalog/product/placeholder/default/placeholder.jpeg"};
 
           tryRenderAemAssetsImage(ctx, {
             alias: product.sku,
-            imageProps: defaultImageProps,
+            imageProps: imageProps,
             wrapper: anchorWrapper,
             params: {
               width: defaultImageProps.width,
