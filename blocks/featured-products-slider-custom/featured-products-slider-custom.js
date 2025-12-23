@@ -148,6 +148,7 @@ function createProductCard(product) {
   
   const quantityInput = document.createElement('input');
   quantityInput.type = 'number';
+  quantityInput.name = 'quantity';
   quantityInput.className = 'quantity-input';
   quantityInput.value = '1';
   quantityInput.min = '1';
