@@ -17,9 +17,6 @@ export default async function decorate(block) {
   const root = fragment.querySelector('ul');
   if (!root) return;
 
-  const firstItem = root.querySelector(':scope > li');
-  const isMainPage = window.location.pathname === '/' ? true : false;
-
   // helper functions
   const setExpanded = (el, state) =>
     el?.setAttribute('aria-expanded', String(state));
@@ -76,22 +73,13 @@ export default async function decorate(block) {
       });
       li.addEventListener('mouseleave', () => {
         closeTimer = setTimeout(() => {
-          if (isMainPage) {
-            if (li !== firstItem) closeItem(li);
-          } else {
-            closeItem(li);
-          }
+          closeItem(li);
         }, 150);
       });
 
       li.addEventListener('focusin', () => openItem(li));
       li.addEventListener('focusout', (e) => {
-        if(isMainPage){
-          if(!li.contains(e.relatedTarget) && li !== firstItem) closeItem(li);
-        }
-        else {
-          if (!li.contains(e.relatedTarget)) closeItem(li);
-        }
+        if (!li.contains(e.relatedTarget)) closeItem(li);
       });
 
       if (control) {
@@ -101,12 +89,7 @@ export default async function decorate(block) {
             e.preventDefault();
           }
           if (e.key === 'Escape') {
-            if(isMainPage){
-              if(li !== firstItem) closeItem(li);
-            }
-            else {
-              closeItem(li);
-            }
+            closeItem(li);
             control.focus();
           }
         });
@@ -131,8 +114,4 @@ export default async function decorate(block) {
   }
 
   process(root);
-
-  if (isMainPage && firstItem?.classList.contains('has-children')) {
-    openItem(firstItem);
-  }
 }
