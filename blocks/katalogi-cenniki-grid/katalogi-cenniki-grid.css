@@ -1,0 +1,38 @@
+.katalogi-cenniki-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  grid-template-rows: repeat(auto-fill, max-content);
+  gap: 30px;
+}
+
+.katalogi-cenniki-grid .catalog-container {
+  border: 1px solid rgb(0 0 0 / 40%);
+  text-align: center;
+}
+
+.katalogi-cenniki-grid .catalog-container .picture-container {
+  padding: 20px;
+}
+
+.katalogi-cenniki-grid .catalog-container .label-container {
+  background-color: var(--color-neutral-400);
+  border-top: 1px solid rgb(0 0 0 / 40%);
+
+  &:hover > p, 
+  &:hover > p > a {
+    color: var(--color-accent);
+  }
+}
+
+.katalogi-cenniki-grid .catalog-container .label-container > p {
+  margin: 0;
+  padding: 10px;
+  font-weight: 600;
+  transition: color 0.2s ease;
+}
+
+.katalogi-cenniki-grid .catalog-container .label-container > p > a {
+  transition: color 0.2s ease;
+  text-decoration: none;
+  cursor: pointer;
+}
