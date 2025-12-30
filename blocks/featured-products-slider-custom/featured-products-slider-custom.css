@@ -5,9 +5,9 @@
 .block-label {
   width: 100%;
   text-align: center;
-  font-size: 1.25em;
+  font-size: 2em;
   letter-spacing: var(--type-headline-1-letter-spacing);
-  margin-bottom: var(--spacing-medium);
+  margin-bottom: var(--spacing-big);
 }
 
 .featured-products-slider-custom {

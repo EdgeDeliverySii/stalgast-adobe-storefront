@@ -1,0 +1,49 @@
+.business-ideas-section-title {
+  width: 100%;
+  text-align: center;
+  font-size: 2em;
+  letter-spacing: var(--type-headline-1-letter-spacing);
+  margin-bottom: var(--spacing-medium);
+}
+
+.business-ideas-custom {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  grid-template-rows: repeat(auto-fill, minmax(250px, 1fr));
+  gap: 30px;
+}
+
+.business-ideas-custom .business-idea-container {
+  position: relative;
+  aspect-ratio: 1;
+}
+
+.business-ideas-custom .business-idea-container .picture-container, 
+.business-ideas-custom .business-idea-container .picture-container > picture {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+.business-ideas-custom .business-idea-container .picture-container > picture > img {
+  object-fit: cover;
+  width: 100%;
+  height: 100%;
+}
+
+.business-ideas-custom .business-idea-container .label-container {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 50px 10px 20px 15px;
+  font-size: 24px;
+  background: linear-gradient(0deg, rgb(0 0 0 / 80%), transparent 95%);
+  color: white;
+  line-height: 1.1;
+  letter-spacing: 1px;
+}
+
+.business-ideas-custom .business-idea-container .label-container > p {
+  margin: 0;
+}
