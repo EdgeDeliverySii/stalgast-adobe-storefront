@@ -1,9 +1,10 @@
 .business-ideas-section-title {
+  font: var(--type-body-1-default-font);
   width: 100%;
   text-align: center;
   font-size: 2em;
   letter-spacing: var(--type-headline-1-letter-spacing);
-  margin-bottom: var(--spacing-medium);
+  margin-bottom: var(--spacing-big);
 }
 
 .business-ideas-custom {

@@ -461,6 +461,7 @@ header nav .nav-tools button.nav-cart-button .nav-cart-icon {
 header nav .nav-tools button.nav-cart-button .nav-cart-value {
   display: flex;
   flex-direction: column;
+  font: var(--type-body-1-medium-font);
   font-size: 0.7em;
   background-color: white;
   border-radius: 0 5px 5px 0;
