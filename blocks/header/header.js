@@ -1,12 +1,14 @@
 import { events } from '@dropins/tools/event-bus.js';
 import { getMetadata } from '../../scripts/aem.js';
 import { loadFragment } from '../fragment/fragment.js';
-import { getProductLink, rootLink } from '../../scripts/commerce.js';
+import { fetchPlaceholders, getProductLink, rootLink } from '../../scripts/commerce.js';
 
 import { renderAuthDropdown } from './renderAuthDropdown.js';
 
 // media query match that indicates mobile/tablet width
 const isDesktop = window.matchMedia('(min-width: 900px)');
+
+const placeholders = await fetchPlaceholders();
 
 const overlay = document.createElement('div');
 overlay.classList.add('overlay');
@@ -166,6 +168,7 @@ export default async function decorate(block) {
   /** Mini Cart */
   const navTools = nav.querySelector('.nav-tools');
 
+  const minicartCurrencyPlaceholder = placeholders?.Cart?.MiniCart?.currency || 'GBP';
   const minicart = document.createRange().createContextualFragment(`
     <div class="minicart-wrapper nav-tools-wrapper">
       <button type="button" class="nav-cart-button" aria-label="Cart">
@@ -173,7 +176,7 @@ export default async function decorate(block) {
           <img src="../../icons/cart.svg" alt="icon" />
         </div>
         <div class="nav-cart-value">
-          <span id="mini-cart-total-value">0.00 zł</span>
+          <span id="mini-cart-total-value">0.00 ${minicartCurrencyPlaceholder}</span>
           <span>netto</span>
         </div>
       </button>
