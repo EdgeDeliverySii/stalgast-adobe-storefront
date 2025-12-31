@@ -188,11 +188,23 @@ export default async function decorate(block) {
   const cartButton = navTools.querySelector('.nav-cart-button');
 
   // cart price update (and initializing when loading the page)
-  events.on('cart/data', (cart) => {
+  events.on('cart/initialized', (cart) => {
     const minicartValueSpan = minicartWrapper.querySelector('#mini-cart-total-value');
     const updatedValue = cart?.subtotal?.excludingTax?.value;
     const updatedCurrency = cart?.subtotal?.excludingTax?.currency;
-    if (minicartValueSpan && updatedValue && updatedCurrency) minicartValueSpan.textContent = `${updatedValue} ${updatedCurrency}`;
+    if (minicartValueSpan && updatedValue != null && updatedCurrency != null){
+      minicartValueSpan.textContent = `${updatedValue.toFixed(2)} ${updatedCurrency}`;
+    };
+  });
+
+  events.on('cart/updated', (cart) => {
+    const minicartValueSpan = minicartWrapper.querySelector('#mini-cart-total-value');
+    const updatedValue = cart?.subtotal?.excludingTax?.value;
+    const updatedCurrency = cart?.subtotal?.excludingTax?.currency;
+    if (minicartValueSpan && updatedValue != null && updatedCurrency != null){
+      minicartValueSpan.textContent = `${updatedValue.toFixed(2)} ${updatedCurrency}`;
+      if(window.location.pathname !== '/cart') toggleMiniCart(true);
+    };
   });
 
   /**

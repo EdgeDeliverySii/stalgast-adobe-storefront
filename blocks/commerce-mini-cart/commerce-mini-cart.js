@@ -32,8 +32,8 @@ export default async function decorate(block) {
   const placeholders = await fetchPlaceholders();
 
   const MESSAGES = {
-    ADDED: placeholders?.Global?.MiniCartAddedMessage,
-    UPDATED: placeholders?.Global?.MiniCartUpdatedMessage,
+    ADDED: placeholders?.Cart?.MiniCart?.Message?.added || 'Product added to cart.',
+    UPDATED: placeholders?.Cart?.MiniCart?.Message?.updated || 'Product(s) updated.',
   };
 
   // Modal state
