@@ -1,0 +1,53 @@
+.business-idea-page-custom {
+  border: 1px solid var(--color-neutral-500);
+  padding: 0 20px;
+}
+
+.business-idea-page-custom .business-idea-content-wrapper {
+  padding: 0;
+}
+
+.business-idea-page-custom .business-idea-content-wrapper .business-idea-title {
+  font: var(--type-body-1-medium-font);
+  font-size: 32px;
+}
+
+.business-idea-page-custom .business-idea-content-wrapper .business-idea-paragraph-highlight {
+  border-top: 1px solid var(--color-neutral-500);
+  border-bottom: 1px solid var(--color-neutral-500);
+  padding: 10px 0;
+  color: var(--color-accent);
+}
+
+.business-idea-page-custom .business-idea-content-wrapper .business-idea-pictures-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 10px;
+}
+
+.business-idea-page-custom .business-idea-content-wrapper .business-idea-picture {
+  display: block;
+  width: 100%;
+
+  & > img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+}
+
+.business-idea-page-custom .business-idea-content-wrapper .business-idea-subtitle {
+  font: var(--type-body-1-medium-font);
+  font-size: 24px;
+  margin-top: 50px;
+}
+
+.business-idea-page-custom .business-idea-content-wrapper .business-idea-linked-list-item {
+  color: var(--color-accent);
+  font: var(--type-body-1-medium-font);
+
+  & > a {
+    color: inherit;
+    font: inherit;
+  }
+}
