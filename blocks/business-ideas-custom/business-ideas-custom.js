@@ -16,6 +16,13 @@ export default async function decorate(block) {
 
       const labelContainer = children[1];
       labelContainer.classList.add('label-container');
+      const link = labelContainer.querySelector('a');
+      if(link){
+        link.classList.remove('button');
+        businessIdeaContainer.addEventListener('click', () => {
+          link.click();
+        });
+      }
     }
   });
 }
